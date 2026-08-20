@@ -14,7 +14,6 @@ header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18p
 .h1{font-size:30px;font-weight:750;margin:6px 0}
 .sub{color:var(--soft);max-width:850px;font-size:13px}
 
-/* Nav Tabs */
 .nav-tabs{display:flex;gap:10px;margin-bottom:20px;border-bottom:2px solid var(--line)}
 .tab-btn{padding:10px 18px;background:none;border:none;border-bottom:3px solid transparent;font-weight:700;font-size:13px;color:var(--soft);cursor:pointer;transition:all .2s}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
@@ -72,7 +71,6 @@ input:focus,textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0
 .excluded div{padding:5px 0;border-bottom:1px solid #eef1f4;font-size:11px;color:var(--soft)}
 .empty{text-align:center;padding:50px 20px;border:1px dashed var(--line);border-radius:9px;color:var(--soft)}
 
-/* Directory Grid */
 .dir-toolbar{display:flex;gap:12px;margin-bottom:16px}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px}
 .dir-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;box-shadow:0 2px 8px #17203308}
@@ -89,16 +87,15 @@ input:focus,textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0
   <header>
     <div class="ey">Mesa Talent Ops</div>
     <div class="h1">Talent Match & Candidate Studio</div>
-    <div class="sub">Match candidates against exact target roles, domains, compensation, and location constraints, or access full candidate profiles directly in the roster directory.</div>
+    <div class="sub">Match candidates against target roles, domains, CTC, and location constraints, or access full candidate profiles directly in the roster directory.</div>
   </header>
 
-  <!-- Navigation Tabs -->
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('match-tab')">🎯 Candidate Matcher</button>
     <button class="tab-btn" onclick="switchTab('directory-tab')">👥 All Candidate Directory (<span id="dir-count">0</span>)</button>
   </div>
 
-  <!-- Tab 1: Matcher View -->
+  <!-- TAB 1: MATCHER -->
   <div id="match-tab" class="view-section active">
     <div class="layout">
       <aside class="panel sticky">
@@ -150,7 +147,7 @@ input:focus,textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0
     </div>
   </div>
 
-  <!-- Tab 2: Directory View -->
+  <!-- TAB 2: DIRECTORY -->
   <div id="directory-tab" class="view-section">
     <div class="dir-toolbar">
       <input id="dir-search" placeholder="🔍 Search candidate name, target domain, role, or location..." oninput="filterDirectory()">
@@ -159,12 +156,11 @@ input:focus,textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0
   </div>
 </div>
 
+<script id="students-data" type="application/json">
+[{"name": "Aakarshan Gupta", "rolesToSource": "1. Program Manager 2. Founder's Office/Generalist 3. Operations", "domain": "Category Management/Ops/Supply Chain", "targetComp": "27", "locationPref": "Bangalore", "successTrack": "Sales / Partnership Internship, Domestic High Comp", "resumeText": "Resume - Upload Resume346fb7c1-8d68-406e-8f32-e869df2aa1ba_AakarshanGupta(10316)-Resume - Upload Resume_Upload Resume_1.pdf", "ffNotes": "Automotive/Mobility/EV Companies:  Wants to get out of edu sec - MONEY MATTERS  Sales  + Category +  Hasn't done very great in demo day interviews  Mobility - Solar Square -  Wants 25L - will not go below", "hardConstraints": "A minimum CTC of 25LPA is a non negotiable for me, below which I would not accept any offer/role.", "experience": "1 - 2", "city": "Chandigarh"}, {"name": "Aakash Lalchandani", "rolesToSource": "", "domain": "Product Management", "targetComp": "25", "locationPref": "TBC", "successTrack": "Product Internship Track", "resumeText": "", "ffNotes": "", "hardConstraints": "", "experience": "1 - 2", "city": "nan"}, {"name": "Aashna Shetty", "rolesToSource": "1. Program Manager 2. Founder's Office/Generalist", "domain": "Category Management/Ops/Supply Chain", "targetComp": "25", "locationPref": "Mumbai  Open to other location", "successTrack": "Sales / Partnership Internship, BizGen Internship", "resumeText": "", "ffNotes": "Wants to be in Mumbai (very strong location pref) Low on confidence Open to HR / BizOps roles but high comp roles! D2C preferred.", "hardConstraints": "Preference: Mumbai > Bangalore (or any metro city) Expected CTC: 18 LPA +", "experience": "< 1", "city": "Mumbai"}, {"name": "Abhigyan Hazarika", "rolesToSource": "1. Category Manager 2. Ops Manager 3. Product Manager", "domain": "Category Management/Ops/Supply Chain", "targetComp": "22", "locationPref": "Bangalore, Gurgaon, Delhi NCR, Mumbai", "successTrack": "Sales / Partnership Internship, BizGen Internship", "resumeText": "", "ffNotes": "Location - BLR preferred, open for NCR/Mumbai/Hyd Needs high direction, highly energetic - low confidence right now. Very keen on PM/Category roles - Tech/E-commerce/D2C companies preferred.", "hardConstraints": "Minimum Expected CTC: 15 LPA Location Preference: Bangalore, Gurgaon, Delhi NCR, Mumbai", "experience": "2 - 3", "city": "Guwahati"}, {"name": "Abhinandan Bose", "rolesToSource": "1. Program Manager 2. Founder's Office/Generalist 3. Marketing", "domain": "Marketing and Growth", "targetComp": "24", "locationPref": "Bangalore, Mumbai, Gurgaon", "successTrack": "Growth / Marketing Internship, BizGen Internship", "resumeText": "", "ffNotes": "Prefers Bangalore/Mumbai. Strong interest in Growth, Marketing, Strategy roles in Consumer Tech & D2C.", "hardConstraints": "Location preference: Bangalore, Mumbai, Gurgaon", "experience": "2 - 3", "city": "Kolkata"}, {"name": "Abhinav Sharma", "rolesToSource": "1. Growth Manager 2. Performance Marketing 3. Product Marketing", "domain": "Marketing and Growth", "targetComp": "26", "locationPref": "Bangalore", "successTrack": "Growth / Marketing Internship", "resumeText": "", "ffNotes": "Experienced marketer, scale focus.", "hardConstraints": "BLR location preferred.", "experience": "3 - 5", "city": "Delhi"}, {"name": "Aditi Roy", "rolesToSource": "1. Generalist 2. Founder's Office 3. Program Manager", "domain": "Generalist/Founder's Office", "targetComp": "22", "locationPref": "Bangalore, Mumbai", "successTrack": "Generalist Track", "resumeText": "", "ffNotes": "Open for early stage startups.", "hardConstraints": "", "experience": "1 - 2", "city": "Bangalore"}, {"name": "Ananya Sharma", "rolesToSource": "1. Investment Analyst 2. Strategy 3. Founder's Office", "domain": "Finance / Investment", "targetComp": "28", "locationPref": "Bangalore, Mumbai", "successTrack": "Finance & Investment Track", "resumeText": "", "ffNotes": "Strong financial modeling experience.", "hardConstraints": "Prefers VC/PE or Strategy roles.", "experience": "2 - 4", "city": "Mumbai"}, {"name": "Janvi Kela", "rolesToSource": "1. Program Manager 2. Founder's Office / Generalist 3. Key Account Manager", "domain": "Generalist / Operations", "targetComp": "25", "locationPref": "Mumbai, Bangalore", "successTrack": "Generalist Track", "resumeText": "KAM intern at Restaverse managing 15+ restaurant brands to ₹1Cr+ monthly revenue. Launched pet products retail startup generating ₹1.5Cr+ revenue yearly. GPA 3.56/4, Top 10% Trailblaz-Her Scholarship winner.", "ffNotes": "Strong generalist profile with sales, ops, and founder's office experience.", "hardConstraints": "", "experience": "2 - 3", "city": "Mumbai"}]
+</script>
+
 <script>
-const LEGACY='https://raw.githubusercontent.com/maanya-ship-it/Talent-match-studio/6566e40f21c72978b9f4f8dbca782811af80307d/index.html';
-
-/* ADD NEW CANDIDATES MANUALLY TO THIS ARRAY IF NEEDED */
-const NEW_STUDENTS = [];
-
 let students=[], mode='strict';
 const $=id=>document.getElementById(id), norm=s=>String(s||'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9%+./ -]/g,' ').replace(/\s+/g,' ').trim(), toks=s=>norm(s).split(/[^a-z0-9]+/).filter(x=>x.length>2), esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);
 
@@ -181,23 +177,21 @@ function loc(s,req){if(!req.length)return[true,'Any location'];let raw=norm([s.l
 
 function comp(s,min,max){const t=parseFloat(String(s.targetComp||'').replace(/[^0-9.]/g,''));if(Number.isFinite(max)&&Number.isFinite(t)&&t>max)return[false,`₹${t}L target exceeds ₹${max}L`];if(Number.isFinite(min)&&Number.isFinite(t)&&t<min)return[false,`₹${t}L target below ₹${min}L`];return[true,'Comp aligned']}
 
-// Role Fit Verification
 function roleFit(s, role){
   if(!role.trim()) return true;
   const userRoles = role.split(',').map(norm).filter(Boolean);
-  const candTargetRoles = norm([s.rolesToSource, s.domain, s.minor1, s.minor2].join(' '));
+  const candTargetRoles = norm([s.rolesToSource, s.domain, s.successTrack].join(' '));
   return userRoles.some(r => candTargetRoles.includes(r));
 }
 
 function score(s,role,jd,hi){
-  const corpus=norm([s.rolesToSource,s.domain,s.minor1,s.minor2,s.functionalRTW,s.sectoralRTW,s.successTrack,s.resumeText,s.ffNotes,s.remarks].join(' ')),r=toks(role),j=toks(jd),h=toks(hi),ov=a=>a.filter(x=>corpus.includes(x)).length,rs=ov(r),js=ov(j),hs=ov(h);
+  const corpus=norm([s.rolesToSource,s.domain,s.successTrack,s.resumeText,s.ffNotes,s.hardConstraints].join(' ')),r=toks(role),j=toks(jd),h=toks(hi),ov=a=>a.filter(x=>corpus.includes(x)).length,rs=ov(r),js=ov(j),hs=ov(h);
   let n=rs*9+Math.min(js,16)*3+hs*11;
   if(norm(s.rolesToSource).includes(norm(role)))n+=18;
-  if(s.priority==='P0')n+=3;else if(s.priority==='P1')n+=2;
   return{n,rs,js,hs}
 }
 
-function evidence(s){const a=(s.resumeText||'').split(/(?<=[.!?])\s+|\n+/).filter(Boolean),b=a.filter(x=>/\d|₹|\$|%|Cr|Lakh|MRR|ARR|AUM|revenue|clients|customers|team|leads/i.test(x));return(b.length?b:a).slice(0,2).join(' ')}
+function evidence(s){const a=(s.resumeText||s.ffNotes||'').split(/(?<=[.!?])\s+|\n+/).filter(Boolean),b=a.filter(x=>/\d|₹|\$|%|Cr|Lakh|MRR|ARR|AUM|revenue|clients|customers|team|leads/i.test(x));return(b.length?b:a).slice(0,2).join(' ')}
 
 function run(){
   const role=$('role').value.trim(),roles=role.split(',').map(x=>x.trim()).filter(Boolean),hi=$('highlight').value.trim(),jd=$('jd').value.trim(),req=$('location').value.split(',').map(norm).filter(Boolean),min=parseFloat($('min').value),max=parseFloat($('max').value),rows=[],bad=[];
@@ -207,11 +201,10 @@ function run(){
     const matchedRole = roleFit(s, role);
     const hasHighlight = !hi.length || q.hs > 0;
     
-    // Strict Mode requires explicit role fit, comp, location, and highlight context
     const hard = c[0] && l[0] && matchedRole && (mode !== 'strict' || hasHighlight);
     
     if(!hard && mode === 'strict'){
-      const reasons = [!matchedRole?`Target role "${role}" not in student preferences`:'' ,!c[0]?c[1]:'', !l[0]?l[1]:'', !hasHighlight?`Missing highlight context: "${hi}"`:''].filter(Boolean).join(' · ');
+      const reasons = [!matchedRole?`Target role "${role}" not in candidate preference`:'' ,!c[0]?c[1]:'', !l[0]?l[1]:'', !hasHighlight?`Missing highlight context: "${hi}"`:''].filter(Boolean).join(' · ');
       bad.push([s, reasons]);
       continue;
     }
@@ -219,7 +212,6 @@ function run(){
     let total = q.n + (c[0]?8:-18) + (l[0]?8:-18);
     if(!matchedRole) total -= 30;
     if(!hasHighlight) total -= 20;
-    if(mode==='broad' && (!c[0] || !l[0])) total -= 15;
     
     rows.push({s,c,l,q,total});
   }
@@ -229,9 +221,9 @@ function run(){
 
 function render(d){
   $('title').textContent=`${d.rows.length} best-fit candidates`;
-  $('note').textContent=`${d.roles.join(' + ')||'No role'} · ${d.req.join(', ')||'Any location'} · ${Number.isFinite(d.min)||Number.isFinite(d.max)?'₹'+(Number.isFinite(d.min)?d.min:'—')+'L–₹'+(Number.isFinite(d.max)?d.max:'—')+'L':'Any compensation'}`;
+  $('note').textContent=`${d.roles.join(' + ')||'All roles'} · ${d.req.join(', ')||'Any location'} · ${Number.isFinite(d.min)||Number.isFinite(d.max)?'₹'+(Number.isFinite(d.min)?d.min:'—')+'L–₹'+(Number.isFinite(d.max)?d.max:'—')+'L':'Any compensation'}`;
   const mx=Math.max(1,...d.rows.map(x=>x.total));
-  let html=`<div class="summary"><b>Matching logic:</b> Candidates are matched strictly against desired target roles, primary domains, comp, and location.<div class="badges"><span class="badge">Strict Domain Alignment</span><span class="badge">Metrics Enforced</span><span class="badge">Zero Invented Facts</span></div></div>`;
+  let html=`<div class="summary"><b>Matching logic:</b> Direct role, domain, compensation, and location constraints enforced. In Strict Mode, missing highlights or non-matching roles are filtered out.</div>`;
   html+=d.rows.map((r,i)=>{const s=r.s,p=Math.max(1,Math.min(100,Math.round(r.total/mx*100)));return `<div class="card" data-name="${esc(s.name)}"><div class="top"><div><div class="rank">#${i+1}</div><div class="name">${esc(s.name)}</div><div class="domain">${esc(s.domain||s.rolesToSource||'')}</div></div><div class="score"><b>${p}</b><span>fit</span></div></div><div class="meta"><div><small>Comp</small><b>${esc(s.targetComp||'Not set')} LPA ${r.c[0]?'✓':'✕'}</b></div><div><small>Location</small><b>${esc(s.locationPref||s.city||'Not set')} ${r.l[0]?'✓':'✕'}</b></div><div><small>Role Match</small><b>${r.q.rs?'Direct Target':'Adjacent'}</b></div><div><small>Highlight</small><b>${d.hi?(r.q.hs?'Matched':'Not found'):'Auto'}</b></div></div><div class="why"><strong>Why matched:</strong> ${esc(evidence(s))}</div><div class="actions"><button class="btn blue gen">Generate one-liner + blurb</button></div><div class="out"><h4>One-liner</h4><p class="one"></p><h4>Blurb</h4><p class="blurb"></p><div class="actions"><button class="btn copy1">Copy one-liner</button><button class="btn copy2">Copy blurb</button></div></div></div>`}).join('');
   if(d.bad.length)html+=`<div class="excluded"><h4>Excluded by hard constraints</h4>${d.bad.slice(0,12).map(x=>`<div><b>${esc(x[0].name)}</b> · ${esc(x[1])}</div>`).join('')}</div>`;
   $('results').innerHTML=html;
@@ -258,19 +250,19 @@ TARGET ROLE: ${d.roles.join(', ')}
 HIGHLIGHT KEYWORD: ${d.hi || 'None'}
 
 CANDIDATE DATA:
-${JSON.stringify({name:s.name,rolesToSource:s.rolesToSource,domain:s.domain,experience:s.experience,locationPref:s.locationPref,targetComp:s.targetComp,successTrack:s.successTrack,resumeText:s.resumeText,ffNotes:s.ffNotes,remarks:s.remarks})}
+${JSON.stringify({name:s.name,rolesToSource:s.rolesToSource,domain:s.domain,experience:s.experience,locationPref:s.locationPref,targetComp:s.targetComp,successTrack:s.successTrack,resumeText:s.resumeText,ffNotes:s.ffNotes})}
 
 RULES:
-1. MANDATORY METRIC IN ONE-LINER: The ONE-LINER must state a verified metric from the candidate data (e.g., revenue, team size, GPA, scholarship, scale).
-2. NO HALLUCINATED EXPERIENCE: Never claim experience with "${d.hi}" if absent from candidate profile.
-3. NO FILLER: Avoid words like "seasoned professional", "proven track record", "results-driven".
+1. MANDATORY METRIC IN ONE-LINER: The ONE-LINER must explicitly contain at least one verified metric from candidate data (e.g., revenue, team size, GPA, rank).
+2. ZERO FABRICATION: Do not mention "${d.hi}" if absent from candidate profile.
+3. NO FILLER: Avoid words like "seasoned professional" or "proven track record".
 
 FORMAT REQUIRED:
 ONE-LINER:
-<[Candidate Name], a [Domain/Role], [action verb + concrete metric from profile].>
+<[Candidate Name], a [Domain/Role], [action verb + concrete metric].>
 
 BLURB:
-<2-3 concise sentences detailing verified achievements and scope from candidate profile.>`;
+<2-3 concise sentences detailing verified achievements from candidate profile.>`;
 
   const res=await fetch('/api/blurb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
   if(!res.ok)throw Error('failed');
@@ -281,11 +273,10 @@ BLURB:
   }
 }
 
-/* RENDER DIRECTORY */
 function renderDirectory(list){
   $('dir-count').textContent = list.length;
   if(!list.length){
-    $('directory-grid').innerHTML = '<div class="empty">No candidates found.</div>';
+    $('directory-grid').innerHTML = '<div class="empty">No candidates match search query.</div>';
     return;
   }
   $('directory-grid').innerHTML = list.map((s, idx) => `
@@ -293,14 +284,14 @@ function renderDirectory(list){
       <div class="dir-header">
         <div>
           <div class="dir-name">${esc(s.name)}</div>
-          <div class="dir-row" style="color:var(--accent);font-weight:600">${esc(s.domain || s.rolesToSource || 'Generalist')}</div>
+          <div class="dir-row" style="color:var(--accent);font-weight:600">${esc(s.domain || 'Generalist')}</div>
         </div>
         <span class="dir-tag">${esc(s.targetComp || 'N/A')} LPA</span>
       </div>
       <div class="dir-row"><strong>Target Roles:</strong> ${esc(s.rolesToSource || 'Not specified')}</div>
       <div class="dir-row"><strong>Preferred Location:</strong> ${esc(s.locationPref || s.city || 'Open')}</div>
       <div class="dir-row"><strong>Experience:</strong> ${esc(s.experience || 'N/A')}</div>
-      <button class="btn" style="margin-top:6px;width:100%" onclick="toggleDirDetails(${idx})">View Full Details & Resume Notes</button>
+      <button class="btn" style="margin-top:6px;width:100%" onclick="toggleDirDetails(${idx})">View Full Details & Notes</button>
       <div id="dir-details-${idx}" class="dir-details">
         <div><strong>Success Track:</strong> ${esc(s.successTrack || 'N/A')}</div>
         <div style="margin-top:4px"><strong>Resume Summary / Notes:</strong> ${esc(s.resumeText || s.ffNotes || 'N/A')}</div>
@@ -317,21 +308,17 @@ function toggleDirDetails(idx){
 
 function filterDirectory(){
   const q = norm($('dir-search').value);
-  const filtered = students.filter(s => norm([s.name, s.domain, s.rolesToSource, s.locationPref, s.city, s.resumeText].join(' ')).includes(q));
+  const filtered = students.filter(s => norm([s.name, s.domain, s.rolesToSource, s.locationPref, s.city, s.resumeText, s.ffNotes].join(' ')).includes(q));
   renderDirectory(filtered);
 }
 
-async function load(){
+function load(){
   try{
-    const r=await fetch(LEGACY),t=await r.text(),doc=new DOMParser().parseFromString(t,'text/html');
-    const fetchedStudents=JSON.parse(doc.getElementById('students-data').textContent||'[]');
-    students=[...fetchedStudents, ...NEW_STUDENTS];
-    $('note').textContent=`Loaded ${students.length} candidates from roster.`;
+    students = JSON.parse($('students-data').textContent || '[]');
+    $('note').textContent = `Loaded ${students.length} candidates from roster.`;
     renderDirectory(students);
   }catch(e){
-    students=[...NEW_STUDENTS];
-    $('note').textContent=students.length ? `Loaded ${students.length} candidates.` : `Could not load candidate roster.`;
-    renderDirectory(students);
+    $('note').textContent = `Error loading candidate data.`;
   }
 }
 
