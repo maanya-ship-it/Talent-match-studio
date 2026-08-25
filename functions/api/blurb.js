@@ -1,12 +1,6 @@
-// Cloudflare Pages Function.
-// Uses Cloudflare's built-in Workers AI (an "AI" binding) to generate blurbs
-// for free — 10,000 neurons/day included on every Cloudflare account, no
-// credit card, no external API key, no billing setup of any kind.
-//
-// Setup (one time, in the Cloudflare dashboard):
-//   Pages project -> Settings -> Functions -> AI bindings -> Add binding
-//     Variable name: AI
-//   Then redeploy. That's it — no key to paste anywhere.
+// Cloudflare Pages Function — evidence-first candidate blurb generation.
+// The browser sends the candidate evidence and role context; this endpoint
+// only generates prose and never has access to recruiter credentials or sheets.
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -14,10 +8,9 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type",
 };
 
-// Small, fast open model — keeps each blurb well within the free daily
-// neuron budget. Swap for "@cf/meta/llama-3.1-8b-instruct" for higher
-// quality at a higher neuron cost per call, if you have headroom.
-const MODEL = "@cf/meta/llama-3.2-3b-instruct";
+// Higher-quality model for recruiter-facing copy. The frontend also has a
+// deterministic fallback, so generation remains usable if AI is unavailable.
+const MODEL = "@cf/meta/llama-3.1-8b-instruct";
 
 export async function onRequestOptions() {
   return new Response(null, { headers: CORS_HEADERS });
@@ -28,12 +21,7 @@ export async function onRequestPost(context) {
 
   if (!env.AI) {
     return new Response(
-      JSON.stringify({
-        error: {
-          message:
-            "This deployment has no AI binding. In Cloudflare dashboard: Pages project > Settings > Functions > AI bindings > Add binding (variable name 'AI'), then redeploy.",
-        },
-      }),
+      JSON.stringify({ error: { message: "AI binding is not configured." } }),
       { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } }
     );
   }
@@ -56,16 +44,28 @@ export async function onRequestPost(context) {
     );
   }
 
+  const system = `You are an exceptionally careful executive recruiter. You are a rewriting engine, not a fact generator.
+
+SOURCE-OF-TRUTH RULES:
+1. Every company, title, skill, sector, project, responsibility and metric must be explicitly present in VERIFIED CANDIDATE EVIDENCE in the user prompt.
+2. Never invent, infer, round, shorten, combine or reinterpret numbers. Preserve complete metric + outcome phrases. For example, never output "₹6" when the evidence says "₹6L revenue".
+3. Recruiter notes, sourcing history, process status, compensation, location, rejection feedback and next steps are not achievement evidence.
+4. Do not use a metric unless its outcome/context is also stated.
+5. Do not turn a recruiter/process action such as making collateral into a candidate achievement.
+6. If evidence is insufficient, be conservative rather than filling gaps.
+7. Return exactly the requested format and no commentary.`;
+
   try {
     const result = await env.AI.run(MODEL, {
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: 400,
-      temperature: 0.35,
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: prompt },
+      ],
+      max_tokens: 550,
+      temperature: 0.15,
     });
 
-    // Workers AI text-generation models return { response: "..." }.
     const text = (result && (result.response ?? result.text ?? "")) || "";
-
     return new Response(JSON.stringify({ text }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...CORS_HEADERS },
